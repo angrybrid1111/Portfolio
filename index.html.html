@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오 | 콘텐츠 크리에이터 & 번역가</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            950: '#0f172a',
+                        },
+                        accent: {
+                            indigo: '#6366f1',
+                            violet: '#8b5cf6',
+                            teal: '#14b8a6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 light:bg-slate-50 light:text-slate-800 transition-colors duration-300 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300 glass border-b border-slate-800/50" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-xl font-bold tracking-wider flex items-center gap-2 group">
+                <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-violet flex items-center justify-center text-white font-extrabold shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                    LN
+                </span>
+                <span class="text-slate-100 font-bold group-hover:text-brand-400 transition-colors">CREATIVE<span class="text-brand-500">.</span></span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-white transition-colors">소개 (About)</a>
+                <a href="#portfolio" class="text-slate-300 hover:text-white transition-colors">포트폴리오 (Works)</a>
+                <a href="#services" class="text-slate-300 hover:text-white transition-colors">작업 방식 (Services)</a>
+                <a href="#contact" class="text-slate-300 hover:text-white transition-colors">문의하기 (Contact)</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden md:flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-all border border-slate-700/50" title="테마 변경">
+                    <i class="fa-solid fa-moon text-lg" id="theme-toggle-dark-icon"></i>
+                    <i class="fa-solid fa-sun text-lg hidden" id="theme-toggle-light-icon"></i>
+                </button>
+                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-indigo hover:from-brand-500 hover:to-accent-violet text-white font-medium text-sm shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 hover:-translate-y-0.5 transition-all">
+                    작업 의뢰하기
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center space-x-3 md:hidden">
+                <button id="mobile-theme-toggle" class="p-2 rounded-lg bg-slate-800 text-slate-300">
+                    <i class="fa-solid fa-moon" id="mobile-theme-icon"></i>
+                </button>
+                <button id="mobile-menu-btn" class="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="block py-2 text-slate-300 hover:text-white font-medium">소개 (About)</a>
+            <a href="#portfolio" class="block py-2 text-slate-300 hover:text-white font-medium">포트폴리오 (Works)</a>
+            <a href="#services" class="block py-2 text-slate-300 hover:text-white font-medium">작업 방식 (Services)</a>
+            <a href="#contact" class="block py-2 text-slate-300 hover:text-white font-medium">문의하기 (Contact)</a>
+            <a href="#contact" class="block w-full text-center mt-4 py-3 rounded-xl bg-brand-600 text-white font-semibold shadow-md">
+                작업 의뢰하기
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden flex items-center justify-center">
+        <!-- Background Ambient Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-[400px] h-[400px] bg-accent-violet/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 border border-brand-500/30 text-xs sm:text-sm font-medium text-brand-300">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                영상 번역 · 스토리 창작 · 영상 편집 · 로컬라이징
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                글과 언어로 가치를 전달하는<br>
+                <span class="gradient-text">창작자 & 번역가</span>입니다.
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                한·일·영 언어의 뉘앙스를 매끄럽게 살리는 번역부터 시선을 사로잡는 웹소설/웹툰 스토리 창작, 몰입감을 더하는 영상 편집까지 콘텐츠의 감동을 확장합니다.
+            </p>
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-600 to-accent-indigo hover:from-brand-500 hover:to-accent-violet text-white font-semibold text-base shadow-xl shadow-brand-600/25 hover:shadow-brand-600/40 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                    포트폴리오 보기 <i class="fa-solid fa-arrow-down text-sm"></i>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl glass hover:bg-slate-800/60 text-slate-200 hover:text-white font-semibold text-base transition-all border border-slate-700/60 flex items-center justify-center gap-2">
+                    작업 의뢰 문의 <i class="fa-regular fa-paper-plane text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Highlights Summary -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-10 border-t border-slate-800/80">
+                <div class="p-4 rounded-xl glass text-center">
+                    <p class="text-2xl sm:text-3xl font-bold text-white mb-1">100%</p>
+                    <p class="text-xs text-slate-400">자연스러운 현지화(Localization)</p>
+                </div>
+                <div class="p-4 rounded-xl glass text-center">
+                    <p class="text-2xl sm:text-3xl font-bold text-white mb-1">JLPT N1</p>
+                    <p class="text-xs text-slate-400">일한/한일 전문 번역</p>
+                </div>
+                <div class="p-4 rounded-xl glass text-center">
+                    <p class="text-2xl sm:text-3xl font-bold text-white mb-1">50+</p>
+                    <p class="text-xs text-slate-400">영상 자막 및 편집 프로젝트</p>
+                </div>
+                <div class="p-4 rounded-xl glass text-center">
+                    <p class="text-2xl sm:text-3xl font-bold text-white mb-1">창작/시나리오</p>
+                    <p class="text-xs text-slate-400">웹소설 및 영상 콘티 기획</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-900/50 relative border-t border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-brand-400 uppercase tracking-widest mb-2">ABOUT ME</h2>
+                <p class="text-3xl font-bold text-white">언어의 장벽을 낮추고, 이야기의 재미를 극대화합니다</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Profile & Intro Card -->
+                <div class="lg:col-span-5 glass p-8 rounded-2xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-500/10 rounded-full blur-2xl"></div>
+                    <div class="flex items-center gap-5 mb-6">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-brand-500 to-accent-violet flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">김서연 (Seoyeon Kim)</h3>
+                            <p class="text-sm text-brand-400">콘텐츠 번역가 & 스토리 에디터</p>
+                            <p class="text-xs text-slate-400 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> Seoul, South Korea</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6 font-light">
+                        문화적 맥락과 뉘앙스를 완벽히 이해하는 로컬라이징 번역가이자, 독자의 몰입감을 이끌어내는 서사 창작자입니다. 단순 직역을 넘어 매체에 최적화된 자연스러운 자막과 텍스트를 제공합니다.
+                    </p>
+                    <div class="space-y-3 border-t border-slate-800 pt-6 text-sm">
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span class="text-slate-400"><i class="fa-solid fa-language text-brand-400 w-5"></i> 주요 언어</span>
+                            <span class="font-medium text-white">한국어 (모국어), 일본어, 영어</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span class="text-slate-400"><i class="fa-solid fa-certificate text-brand-400 w-5"></i> 자격 사항</span>
+                            <span class="font-medium text-white">JLPT N1 만점, TOEIC 950+</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-300">
+                            <span class="text-slate-400"><i class="fa-solid fa-briefcase text-brand-400 w-5"></i> 주요 분야</span>
+                            <span class="font-medium text-white">웹소설, 웹툰, 유튜브, 영상자막</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills & Tools Matrix -->
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- Category 1: Languages & Translation -->
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-globe text-brand-400"></i> 번역 및 로컬라이징 역량
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                            <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50">
+                                <p class="font-bold text-slate-200 mb-1">일한 / 한일 번역</p>
+                                <p class="text-slate-400">서브컬처, 게임, 웹툰, 일본 특유의 뉘앙스/구어체 의역 및 문화적 현지화</p>
+                            </div>
+                            <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50">
+                                <p class="font-bold text-slate-200 mb-1">영한 / 한영 번역</p>
+                                <p class="text-slate-400">IT/콘텐츠 인터뷰, 유튜브 미디어 자막, 대중문화 트렌드 싱크 번역</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 2: Software & Tools -->
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-laptop-code text-accent-violet"></i> 사용 툴 및 제작 환경
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-medium text-slate-200 border border-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-film text-red-400"></i> Premiere Pro
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-medium text-slate-200 border border-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-closed-captioning text-yellow-400"></i> Aegisub / Vrew
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-medium text-slate-200 border border-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-paint-brush text-blue-400"></i> Clip Studio Paint
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-medium text-slate-200 border border-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-lines text-slate-300"></i> Notion / Scrivener
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-medium text-slate-200 border border-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-microchip text-emerald-400"></i> Trados / Subtitle Edit
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Category 3: Creative & Editing Strengths -->
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-accent-teal"></i> 창작 & 영상 편집 강점
+                        </h4>
+                        <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside font-light">
+                            <li>웹소설/스토리 기획: 가독성 높은 문체와 흥미로운 로그라인 구성, 대사 현지화</li>
+                            <li>영상 컷편집 & 타이포그래피: 시청자 몰입도를 극대화하는 자막 모션 및 타임코드 싱크</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-sm font-semibold text-brand-400 uppercase tracking-widest mb-2">PORTFOLIO</h2>
+                    <p class="text-3xl font-bold text-white">주요 작업물 및 프로젝트</p>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0 p-1.5 rounded-2xl glass border border-slate-800">
+                    <button class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-brand-600 text-white" data-filter="all">
+                        전체
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition-all" data-filter="translation">
+                        번역 & 로컬라이징
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition-all" data-filter="writing">
+                        창작 & 글쓰기
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition-all" data-filter="video">
+                        영상 번역 & 편집
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+
+                <!-- Item 1: Translation -->
+                <div class="portfolio-item group glass rounded-2xl overflow-hidden hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="translation">
+                    <div class="relative h-48 overflow-hidden bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="웹소설 번역" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-brand-600/90 text-white backdrop-blur-sm">
+                            일한 번역
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-brand-400 font-medium mb-1">웹소설 / 서브컬처</p>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">일본 라이트노벨 현지화 번역 샘플</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                원문의 세계관과 캐릭터 말투 특성을 완벽히 살려 자연스러운 한국어 구어체로 현지화 번역 작업.
+                            </p>
+                        </div>
+                        <button onclick="openModal('modal-trans-1')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-brand-600/20 text-slate-200 hover:text-brand-300 border border-slate-700/60 text-xs font-medium transition-all flex items-center justify-center gap-2">
+                            원문/번역문 비교 보기 <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 2: Creative Writing -->
+                <div class="portfolio-item group glass rounded-2xl overflow-hidden hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="writing">
+                    <div class="relative h-48 overflow-hidden bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80" alt="창작 글쓰기" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-accent-violet/90 text-white backdrop-blur-sm">
+                            웹소설 시나리오
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-accent-violet font-medium mb-1">판타지 / 로맨스판타지</p>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-accent-violet transition-colors">웹소설 [시공간의 도서관] 시놉시스</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                "잊혀진 책들이 모이는 도서관의 사서가 되었다." 독자의 흥미를 유발하는 로그라인과 1화 프롤로그 샘플.
+                            </p>
+                        </div>
+                        <button onclick="openModal('modal-write-1')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-accent-violet/20 text-slate-200 hover:text-accent-violet border border-slate-700/60 text-xs font-medium transition-all flex items-center justify-center gap-2">
+                            시놉시스 & 샘플 읽기 <i class="fa-solid fa-book-open"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 3: Video Translation & Editing -->
+                <div class="portfolio-item group glass rounded-2xl overflow-hidden hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="video">
+                    <div class="relative h-48 overflow-hidden bg-slate-800 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" alt="영상 번역" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60">
+                        <div class="absolute w-12 h-12 rounded-full bg-red-600/90 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </div>
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-red-600/90 text-white backdrop-blur-sm">
+                            자막 번역 + 컷편집
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-red-400 font-medium mb-1">YouTube / 인터뷰 영상</p>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-red-300 transition-colors">글로벌 개발자 인터뷰 한글자막 & 편집</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                영문 음성 타임코드 작업, 전문 용어 한국어 번역, 시청 가독성을 고려한 위치 맞춤 자막 디자인.
+                            </p>
+                        </div>
+                        <button onclick="openModal('modal-video-1')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-red-600/20 text-slate-200 hover:text-red-300 border border-slate-700/60 text-xs font-medium transition-all flex items-center justify-center gap-2">
+                            영상 상세 및 작업 내역 <i class="fa-solid fa-circle-info"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 4: Translation (English Localization) -->
+                <div class="portfolio-item group glass rounded-2xl overflow-hidden hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="translation">
+                    <div class="relative h-48 overflow-hidden bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="웹툰 번역" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-brand-600/90 text-white backdrop-blur-sm">
+                            한영 번역
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-brand-400 font-medium mb-1">K-웹툰 / 글로벌 로컬라이징</p>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-300 transition-colors">한국 인기 웹툰 영문 식자 & 번역</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                한국어 유행어와 밈을 북미 문화권에 맞춰 유쾌하게 패러디 의역한 웹툰 식자 번역 샘플.
+                            </p>
+                        </div>
+                        <button onclick="openModal('modal-trans-2')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-brand-600/20 text-slate-200 hover:text-brand-300 border border-slate-700/60 text-xs font-medium transition-all flex items-center justify-center gap-2">
+                            원문/번역문 비교 보기 <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 5: Video Editing -->
+                <div class="portfolio-item group glass rounded-2xl overflow-hidden hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="video">
+                    <div class="relative h-48 overflow-hidden bg-slate-800 flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80" alt="영상 편집" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60">
+                        <div class="absolute w-12 h-12 rounded-full bg-red-600/90 text-white flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </div>
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-red-600/90 text-white backdrop-blur-sm">
+                            쇼츠 / 릴스 편집
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-red-400 font-medium mb-1">Short-form Content</p>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-red-300 transition-colors">빠른 호흡의 숏폼 다이내믹 편집</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                시선을 사로잡는 타이포 모션, 사운드 효과음(SFX), 컷 편집으로 도파민을 자극하는 숏폼 작업물.
+                            </p>
+                        </div>
+                        <button onclick="openModal('modal-video-2')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-red-600/20 text-slate-200 hover:text-red-300 border border-slate-700/60 text-xs font-medium transition-all flex items-center justify-center gap-2">
+                            영상 상세 및 작업 내역 <i class="fa-solid fa-circle-info"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 6: Creative Writing (Scenario) -->
+                <div class="portfolio-item group glass rounded-2xl overflow-hidden hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="writing">
+                    <div class="relative h-48 overflow-hidden bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80" alt="게임 시나리오" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-accent-violet/90 text-white backdrop-blur-sm">
+                            게임 시나리오
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <p class="text-xs text-accent-violet font-medium mb-1">RPG / 세계관 기획</p>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-accent-violet transition-colors">서브컬처 모바일 게임 퀘스트 대사집</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                캐릭터별 개성을 극대화한 대사 집필 및 퀘스트 분기점 스크립트 작성 샘플.
+                            </p>
+                        </div>
+                        <button onclick="openModal('modal-write-2')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-accent-violet/20 text-slate-200 hover:text-accent-violet border border-slate-700/60 text-xs font-medium transition-all flex items-center justify-center gap-2">
+                            대사집 샘플 읽기 <i class="fa-solid fa-book-open"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Work Process Section -->
+    <section id="services" class="py-20 bg-slate-900/40 relative border-t border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-brand-400 uppercase tracking-widest mb-2">SERVICES & PROCESS</h2>
+                <p class="text-3xl font-bold text-white">체계적인 작업 프로세스로 완성도를 높입니다</p>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="glass p-6 rounded-2xl relative">
+                    <span class="text-4xl font-extrabold text-brand-500/20 absolute top-4 right-4">01</span>
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">1. 의뢰 상담 & 방향성 수립</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        작업의 목적, 타깃 독자/시청자층, 톤앤매너, 분량 및 일정 요구사항을 상세히 파악합니다.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass p-6 rounded-2xl relative">
+                    <span class="text-4xl font-extrabold text-brand-500/20 absolute top-4 right-4">02</span>
+                    <div class="w-12 h-12 rounded-xl bg-accent-violet/20 text-accent-violet flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">2. 초안 작성 & 샘플 전달</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        번역의 톤앤매너를 맞추기 위해 초반 1~2페이지 또는 1분 분량 샘플을 선제적 검토 받습니다.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass p-6 rounded-2xl relative">
+                    <span class="text-4xl font-extrabold text-brand-500/20 absolute top-4 right-4">03</span>
+                    <div class="w-12 h-12 rounded-xl bg-accent-teal/20 text-accent-teal flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-spell-check"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">3. 감수 및 피드백 수정</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        오탈자 점검, 문맥 매끄러움 재검토, 클라이언트 요구사항에 따른 꼼꼼한 피드백 반영.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="glass p-6 rounded-2xl relative">
+                    <span class="text-4xl font-extrabold text-brand-500/20 absolute top-4 right-4">04</span>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">4. 최종 납품 & 사후 지원</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        원하는 파일 형식(SRT, PDF, MP4, Docx 등)으로 최종 납품 및 최종 확인 작업을 마칩니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass p-8 md:p-12 rounded-3xl border border-slate-700/80 shadow-2xl">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white mb-3">작업 의뢰 및 문의하기</h2>
+                    <p class="text-slate-300 text-sm font-light">
+                        프로젝트에 관한 문의나 견적 요청을 남겨주시면 24시간 이내에 친절히 답변해 드립니다.
+                    </p>
+                </div>
+
+                <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-2">성함 / 기업명 <span class="text-red-400">*</span></label>
+                            <input type="text" required placeholder="홍길동" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 text-sm transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-2">이메일 주소 <span class="text-red-400">*</span></label>
+                            <input type="email" required placeholder="example@email.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 text-sm transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-2">의뢰 분야</label>
+                            <select class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-slate-300 focus:outline-none focus:border-brand-500 text-sm transition-colors">
+                                <option>번역 & 로컬라이징 (일/영/한)</option>
+                                <option>웹소설 / 시나리오 글쓰기</option>
+                                <option>영상 번역 자막 (SRT/자막입히기)</option>
+                                <option>영상 컷편집 & 숏폼 제작</option>
+                                <option>기타 통합 프로젝트 문의</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-300 mb-2">희망 납품 기한</label>
+                            <input type="date" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-slate-300 focus:outline-none focus:border-brand-500 text-sm transition-colors">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-2">문의 상세 내용 <span class="text-red-400">*</span></label>
+                        <textarea rows="4" required placeholder="프로젝트 원문 분량, 영상 길이, 원하는 톤앤매너 등 상세 내용을 적어주세요." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 text-sm transition-colors resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-600 to-accent-indigo hover:from-brand-500 hover:to-accent-violet text-white font-bold text-base shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
+                        문의 보내기 <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+
+                <!-- Direct Contact info -->
+                <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-envelope text-brand-400"></i> Direct Email: <span class="text-slate-200">contact@seoyeon-creative.com</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-comment text-yellow-400"></i> 카카오톡 오픈채팅: <span class="text-slate-200">@서연_번역크리에이터</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-slate-950 border-t border-slate-800 text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Seoyeon Kim. All rights reserved.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-slate-300 transition-colors"><i class="fa-brands fa-github text-base"></i></a>
+                <a href="#" class="hover:text-slate-300 transition-colors"><i class="fa-brands fa-twitter text-base"></i></a>
+                <a href="#" class="hover:text-slate-300 transition-colors"><i class="fa-brands fa-youtube text-base"></i></a>
+                <a href="#" class="hover:text-slate-300 transition-colors"><i class="fa-solid fa-blog text-base"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS FOR PORTFOLIO ITEMS -->
+
+    <!-- Modal Trans 1: Japanese Translation -->
+    <div id="modal-trans-1" class="modal fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass max-w-3xl w-full rounded-2xl overflow-hidden max-h-[90vh] flex flex-col border border-slate-700">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/80">
+                <div>
+                    <span class="text-xs text-brand-400 font-semibold">일본어 라이트노벨 번역</span>
+                    <h3 class="text-lg font-bold text-white">현지화 번역 원문/번역문 비교</h3>
+                </div>
+                <button onclick="closeModal('modal-trans-1')" class="text-slate-400 hover:text-white p-2 text-xl">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                <div>
+                    <h4 class="font-bold text-slate-200 mb-2 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-brand-500"></span> 번역 포인트
+                    </h4>
+                    <p class="text-slate-300 text-xs leading-relaxed font-light">
+                        직역하면 다소 어색할 수 있는 일본 특유의 관용 표현과 구어체 말투를 한국 1020세대가 즐겨읽는 라이트노벨의 매끄럽고 현장감 있는 문체로 다듬었습니다.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                        <p class="text-xs font-bold text-slate-400 mb-2">일본어 원문 (Japanese Original)</p>
+                        <p class="text-slate-300 font-serif leading-relaxed text-xs">
+                            「別に、あんたのために prepared したわけじゃないんだ에서! 勘違いしないでよね！」<br><br>
+                            彼女はツンと photon を背けながら、赤くなった耳たぶを隠すようにマフラーに顔をうずめた。
+                        </p>
+                    </div>
+                    <div class="bg-slate-900/90 p-4 rounded-xl border border-brand-500/30">
+                        <p class="text-xs font-bold text-brand-400 mb-2">한국어 번역 (Korean Localized)</p>
+                        <p class="text-slate-200 leading-relaxed text-xs">
+                            "딱히 너 주려고 준비한 건 아니거든? 착각하지 마!"<br><br>
+                            그녀는 팩 고개를 돌리며, 붉어진 귓볼을 숨기려는 듯 머플러 속으로 얼굴을 깊숙이 파묻었다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-900/50 text-right">
+                <button onclick="closeModal('modal-trans-1')" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Writing 1: Web Novel Synopsis -->
+    <div id="modal-write-1" class="modal fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass max-w-3xl w-full rounded-2xl overflow-hidden max-h-[90vh] flex flex-col border border-slate-700">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/80">
+                <div>
+                    <span class="text-xs text-accent-violet font-semibold">웹소설 기획 및 창작</span>
+                    <h3 class="text-lg font-bold text-white">[시공간의 도서관] 시놉시스 & 프롤로그</h3>
+                </div>
+                <button onclick="closeModal('modal-write-1')" class="text-slate-400 hover:text-white p-2 text-xl">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                <div class="bg-slate-900/80 p-4 rounded-xl border border-accent-violet/30 space-y-2">
+                    <p class="text-xs text-accent-violet font-bold">로그라인 (Logline)</p>
+                    <p class="text-slate-200 font-medium text-sm">
+                        "세상에서 잊혀진 모든 기록이 모이는 차원의 도서관. 그곳에 불시착한 소년이 책 속의 세계를 구하며 돌아갈 길을 찾는다."
+                    </p>
+                </div>
+                <div class="space-y-3 text-xs text-slate-300 leading-relaxed font-light">
+                    <p class="font-bold text-slate-200 text-sm">프롤로그 샘플</p>
+                    <p>
+                        오래된 종이 냄새가 코끝을 스쳤다. 눈을 떴을 때, 내 앞에는 끝을 알 수 없을 정도로 높이 솟은 책장들이 펼쳐져 있었다. 하늘 대신 빽빽하게 메워진 양장본들의 양각 문양.
+                    </p>
+                    <p>
+                        "새로운 사서인가요?"
+                    </p>
+                    <p>
+                        맑은 목소리와 함께 푸른빛을 띤 은발의 소녀가 책장 사이에서 나타났다. 그녀의 손에 들린 커다란 열쇠가 은은한 빛을 발하고 있었다.
+                    </p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-900/50 text-right">
+                <button onclick="closeModal('modal-write-1')" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Video 1: Video Detail -->
+    <div id="modal-video-1" class="modal fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass max-w-3xl w-full rounded-2xl overflow-hidden max-h-[90vh] flex flex-col border border-slate-700">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/80">
+                <div>
+                    <span class="text-xs text-red-400 font-semibold">영상 자막 번역 및 편집</span>
+                    <h3 class="text-lg font-bold text-white">글로벌 개발자 인터뷰 한글자막</h3>
+                </div>
+                <button onclick="closeModal('modal-video-1')" class="text-slate-400 hover:text-white p-2 text-xl">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                <!-- Video Player Placeholder -->
+                <div class="w-full aspect-video bg-slate-900 rounded-xl overflow-hidden flex flex-col items-center justify-center relative border border-slate-800">
+                    <i class="fa-solid fa-play-circle text-5xl text-red-500 mb-2"></i>
+                    <p class="text-xs text-slate-400">대화형 영상 샘플 미리보기 (포트폴리오 예시)</p>
+                </div>
+                <div class="space-y-3 text-xs">
+                    <h4 class="font-bold text-slate-200 text-sm">작업 담당 범위</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full bg-slate-800 text-brand-300 border border-slate-700">영한 타임코드 자막 (SRT)</span>
+                        <span class="px-3 py-1 rounded-full bg-slate-800 text-brand-300 border border-slate-700">전문 IT/개발 용어 번역 감수</span>
+                        <span class="px-3 py-1 rounded-full bg-slate-800 text-brand-300 border border-slate-700">가독성 자막 디자인 (Premiere Pro)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-900/50 text-right">
+                <button onclick="closeModal('modal-video-1')" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Trans 2: English Webtoon -->
+    <div id="modal-trans-2" class="modal fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass max-w-3xl w-full rounded-2xl overflow-hidden max-h-[90vh] flex flex-col border border-slate-700">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/80">
+                <div>
+                    <span class="text-xs text-brand-400 font-semibold">웹툰 한영 번역</span>
+                    <h3 class="text-lg font-bold text-white">한국 웹툰 북미 로컬라이징 번역</h3>
+                </div>
+                <button onclick="closeModal('modal-trans-2')" class="text-slate-400 hover:text-white p-2 text-xl">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                        <p class="text-xs font-bold text-slate-400 mb-2">한국어 원문</p>
+                        <p class="text-slate-300 leading-relaxed text-xs">
+                            "아 진짜 대박 레전드 사건 ㅋㅋㅋ 이거 실화냐?"
+                        </p>
+                    </div>
+                    <div class="bg-slate-900/90 p-4 rounded-xl border border-brand-500/30">
+                        <p class="text-xs font-bold text-brand-400 mb-2">영문 로컬라이징 번역 (Localized)</p>
+                        <p class="text-slate-200 leading-relaxed text-xs">
+                            "No way, this is absolutely insane! Are you for real right now? LOL"
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-900/50 text-right">
+                <button onclick="closeModal('modal-trans-2')" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Video 2: Shortform Editing -->
+    <div id="modal-video-2" class="modal fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass max-w-3xl w-full rounded-2xl overflow-hidden max-h-[90vh] flex flex-col border border-slate-700">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/80">
+                <div>
+                    <span class="text-xs text-red-400 font-semibold">숏폼 영상 편집</span>
+                    <h3 class="text-lg font-bold text-white">유튜브 쇼츠 / 인스타 릴스 다이내믹 편집</h3>
+                </div>
+                <button onclick="closeModal('modal-video-2')" class="text-slate-400 hover:text-white p-2 text-xl">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                <div class="w-full aspect-video bg-slate-900 rounded-xl overflow-hidden flex flex-col items-center justify-center relative border border-slate-800">
+                    <i class="fa-solid fa-play-circle text-5xl text-red-500 mb-2"></i>
+                    <p class="text-xs text-slate-400">숏폼 하이라이트 영상 미리보기</p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-900/50 text-right">
+                <button onclick="closeModal('modal-video-2')" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Writing 2: Game Scenario -->
+    <div id="modal-write-2" class="modal fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass max-w-3xl w-full rounded-2xl overflow-hidden max-h-[90vh] flex flex-col border border-slate-700">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/80">
+                <div>
+                    <span class="text-xs text-accent-violet font-semibold">게임 시나리오</span>
+                    <h3 class="text-lg font-bold text-white">서브컬처 모바일 RPG 캐릭터 대사집</h3>
+                </div>
+                <button onclick="closeModal('modal-write-2')" class="text-slate-400 hover:text-white p-2 text-xl">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-300 leading-relaxed">
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <p class="font-bold text-accent-violet">[캐릭터: 루나 (츤데레 마법사)]</p>
+                    <p><strong>메인 대사 01:</strong> "흥, 네가 위험해 보여서 도와준 건 아니니까! 오해하지 마!"</p>
+                    <p><strong>스킬 사용 시:</strong> "별빛이여, 저 어리석은 자들에게 심판을!"</p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-900/50 text-right">
+                <button onclick="closeModal('modal-write-2')" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-brand-600 text-white px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none transform translate-y-4 text-sm font-medium flex items-center gap-2">
+        <i class="fa-solid fa-circle-check"></i> <span id="toast-message">문의가 성공적으로 전송되었습니다!</span>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Category Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active tab styles
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-brand-600', 'text-white');
+                    b.classList.add('text-slate-400');
+                });
+                btn.classList.add('active', 'bg-brand-600', 'text-white');
+                btn.classList.remove('text-slate-400');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal on outer click
+        window.addEventListener('click', (e) => {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Form Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast('문의가 성공적으로 전달되었습니다. 빠르게 답신 드리겠습니다!');
+            e.target.reset();
+        }
+
+        // Toast Handler
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            }, 3500);
+        }
+
+        // Dark/Light Theme Toggle (Visual toggle simulator)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
